@@ -1,7 +1,9 @@
 package course.ensf607.assignment6.student;
 
+import course.ensf607.assignment6.course.Course;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +49,18 @@ public class StudentService {
       throw new IllegalStateException("Student username or password is incorrect!");
     }
     return studentQueryResult;
+  }
+
+  public Set<Course> getStudentCourses(Student student) {
+    Optional<Student> studentByUcid = studentRepository.findStudentByUcid(student.getUcid());
+    if (!studentByUcid.isPresent()) {
+      throw new IllegalStateException("Student doesn't exist!");
+    }
+    Student studentFromQuery = studentByUcid.get();
+    Set<Course> coursesByStudent = studentFromQuery.getSubjects();
+    if (coursesByStudent == null) {
+      throw new IllegalStateException("Student is not enrolled in any courses");
+    }
+    return coursesByStudent;
   }
 }

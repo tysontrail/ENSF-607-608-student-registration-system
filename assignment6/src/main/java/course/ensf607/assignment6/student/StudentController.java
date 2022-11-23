@@ -1,6 +1,8 @@
 package course.ensf607.assignment6.student;
 
+import course.ensf607.assignment6.course.Course;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +30,10 @@ public class StudentController {
   @PostMapping("/login")
   public Student loginStudent(@RequestBody Student student) {
     return studentService.loginStudent(student);
+  }
+
+  @GetMapping("/myCourses")
+  public Set<Course> getStudentCourses(@RequestBody Student student) {
+    return studentService.getStudentCourses(student);
   }
 }
