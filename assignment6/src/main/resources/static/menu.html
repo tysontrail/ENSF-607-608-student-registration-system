@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Registration System</title>
   </head>
-  <body>
-    <h1>Welcome to the Student Registration System!</h1>
+  <body onload = 'dispMenu()'>
+    <h1 id="p1">Welcome to the Student Registration System!</h1>
     <h2>Menu</h2>
     <ul>
       <li><a href="course-catalog.html">Course Catalog</a></li>
@@ -17,7 +17,8 @@
         <a href="add-course.html">Add Course</a>
       </li>
       <li><a href="remove-course.html">Remove Course</a></li>
-      <li><a href="index.html">Log Out</a></li>
+      <li><a href="index.html" onclick="clearSession()">Log Out</a></li>
     </ul>
+    <script src="menu1.js"></script>
   </body>
 </html>

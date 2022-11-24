@@ -7,18 +7,23 @@
     <title>Student Registration System</title>
   </head>
   <body>
+    
     <h1>Student Registration System</h1>
-    <h2>Login</h2>
-    <h3>Add User</h3>
-    <form action="menu.html">
+    <h2>Student Login</h2>
+    <form id="loginForm">
       <label for="username">Username:</label><br />
-      <input type="text" id="fname" name="fname" /><br />
+      <input type="text" id="username" name="username" /><br />
       <label for="password">Password:</label><br />
-      <input type="text" id="lname" name="lname" /><br />
+      <input type="text" id="password" name="password" /><br />
       <label for="ucid">UCID:</label><br />
-      <input type="text" id="ID" name="ID" /><br />
+      <input type="text" id="ucid" name="ucid" /><br />
       <br />
       <input type="submit" value="Submit" />
     </form>
+    <ul>
+      <li><a href="register.html">New student? Click here to register</a></li>
+    </ul>
+    <p id="pText"></p>
+    <script src="index.js"></script>
   </body>
 </html>

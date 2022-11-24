@@ -32,7 +32,7 @@ public class StudentController {
     return studentService.loginStudent(student);
   }
 
-  @GetMapping("/myCourses")
+  @PostMapping("/myCourses")
   public Set<Course> getStudentCourses(@RequestBody Student student) {
     return studentService.getStudentCourses(student);
   }
