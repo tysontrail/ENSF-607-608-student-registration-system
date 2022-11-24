@@ -42,7 +42,7 @@ public class CourseController {
   //     return course;
   // }
 
-  @PutMapping("/{courseName}/students/{studentId}")
+  @PutMapping("/{courseName}/student/{studentId}")
   public Course enrollStudentToCourse(
       @PathVariable String courseName, @PathVariable Long studentId) {
     Course course = courseService.getCourseByName(courseName);
@@ -52,7 +52,7 @@ public class CourseController {
     return course;
   }
 
-  @DeleteMapping("/{courseName}/students/{studentId}")
+  @DeleteMapping("/{courseName}/student/{studentId}")
   public Course unenrollStudentToCourse(
       @PathVariable String courseName, @PathVariable Long studentId) {
     Course course = courseService.getCourseByName(courseName);

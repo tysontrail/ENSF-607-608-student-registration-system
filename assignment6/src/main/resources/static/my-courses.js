@@ -1,5 +1,4 @@
 
-
 function displayMyCourses(){
     console.log(sessionStorage.getItem("student"))
     fetch("http://localhost:8080/api/v1/student/myCourses", {
