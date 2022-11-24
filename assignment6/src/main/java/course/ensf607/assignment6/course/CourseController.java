@@ -25,6 +25,8 @@ public class CourseController {
     return courseService.getAllCourses();
   }
 
+  // @GetMapping("/{courseName}")
+
   @PostMapping
   public void registerNewCourse(@RequestBody Course course) {
     courseService.addNewCourse(course);
