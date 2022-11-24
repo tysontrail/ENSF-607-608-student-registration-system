@@ -25,7 +25,11 @@ public class CourseController {
     return courseService.getAllCourses();
   }
 
-  // @GetMapping("/{courseName}")
+  @GetMapping("/{courseName}")
+  public Course getCourse(@PathVariable String courseName) {
+    Course course = courseService.getCourseByName(courseName);
+    return course;
+  }
 
   @PostMapping
   public void registerNewCourse(@RequestBody Course course) {
