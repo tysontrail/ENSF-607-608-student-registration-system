@@ -11,7 +11,6 @@ function loadPage(){
     window.location.href = nextPageurl;
 }
 
-
 //post function. Stringifies for you and recieves object
 async function postFetch(url, body1) {
 
@@ -38,16 +37,6 @@ async function postFetch(url, body1) {
             alert(content.message);
         }
     });
-    // }).then(response => {
-    //     console.log("then1");
-    //     console.log(response);
-    //     console.log(response.json());
-    // })
-    // .then(data => {
-    //     console.log("then2");
-    //     console.log(data);
-    //     console.log(JSON.stringify(data));
-    // })
 }
 
 //function putFetch
@@ -56,14 +45,6 @@ function enrollFetch(studentId, courseId ,url) {
       method: 'PUT'
     })
     .then(response => response.json());
-}
-
-//function for registering student
-function registerStud(){
-
-    // fetch('http://localhost:8080/course', {method: 'POST', body: new FormData(form)})
-    // .then(res => res.json())
-    // .then(console.log)
 }
 
 loginForm.onsubmit = async (e) => {
@@ -86,17 +67,3 @@ loginForm.onsubmit = async (e) => {
     postFetch(apiURL, studentObj);
     
 };
-
-//from tutorial. this is a function aparently
-// const saveLead = async() => {
-//     let response = await fetch('url')
-//     console.log(response);
-// }
-
-// let response2 = await fetch('ur', {
-//     method: 'POST',
-//     headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//     }
-// })

@@ -3,7 +3,7 @@ addCourse.onsubmit = async (e) => {
     e.preventDefault();
 
     data = new FormData(addCourse);
-    [cname, section] = data.values()
+    [cname] = data.values()
     console.log(cname);
 
     fetch('http://localhost:8080/api/v1/course/' + cname + '/student/' +  JSON.parse(sessionStorage.getItem("student")).id,
@@ -16,7 +16,6 @@ addCourse.onsubmit = async (e) => {
         console.log(rawResponse);
         if (rawResponse.status == 200){
             student = await rawResponse.json();
-            console.log("status code 200");
             alert("Course added successfully");
         }
         else{
