@@ -12,71 +12,95 @@ CREATE TABLE STUDENT (
 
 INSERT INTO STUDENT (StudentID, LName, FName)
 VALUES
-('123456','Trail','Tyson'),
-('696969','Weech','Kennethy'),
-('987654','Burr','Bill'),
-('121212','Holmes','Hollis');
+(1,'Trail','Tyson'),
+(2,'Weech','Kennethy'),
+(3,'Burr','Bill'),
+(4,'Holmes','Hollis');
+
+
+DROP TABLE IF EXISTS DEPARTMENT;
+CREATE TABLE DEPARTMENT (
+	DepID			integer not null,
+    DepCode			varchar(50) not null,
+	DepName				varchar(50) not null,
+	primary key (DepID)
+);
+
+INSERT INTO DEPARTMENT (DepID, DepCode, DepName)
+VALUES
+(1,'ENSF', 'Software Engineering'),
+(2,'ENME', 'Mechanical Engineering'),
+(3,'MATH', 'Mathematics');
+
 
 DROP TABLE IF EXISTS COURSE;
 CREATE TABLE COURSE (
+	CourseID			integer not null,
 	CNumber				integer not null,
-	CName				varchar(4) not null,
-	primary key (CNumber,CName)
+	CName				varchar(50) not null,
+    Department_fk		integer not null,
+	primary key (CourseID),
+    foreign key (Department_fk) references DEPARTMENT(DepID)
 );
 
-INSERT INTO COURSE (CNumber, CName)
+INSERT INTO COURSE (CourseID, CNumber, CName, Department_fk)
 VALUES
-('607','ENSF'),
-('608','ENSF'),
-('611','ENSF'),
-('612','ENSF'),
-('614','ENSF');
+(1, '607','Architecture', 1),
+(2, '608','Databases', 1),
+(3, '611','How Baby Learn', 2),
+(4, '612','Big Data', 2),
+(5, '614','System Design', 3);
+
+
 
 DROP TABLE IF EXISTS OFFERING;
 CREATE TABLE OFFERING (
 	Section				varchar(3) not null,
-	CNumber				integer not null,
-	CName				varchar(4) not null,
-	primary key (Section,CNumber,CName),
-	foreign key (CNumber,CName) references COURSE(CNumber,CName)
+	CourseID			integer not null,
+	primary key (Section,CourseID),
+	foreign key (CourseID) references COURSE(CourseID),
+    unique(Section, CourseID)
 );
 
-INSERT INTO OFFERING (Section, CNumber, CName)
+INSERT INTO OFFERING (Section, CourseID)
 VALUES
-('01','607','ENSF'),
-('02','607','ENSF'),
-('01','608','ENSF'),
-('01','611','ENSF'),
-('01','612','ENSF'),
-('01','614','ENSF');
+('01', 1),
+('02',1),
+('01',2),
+('02',2),
+('01',3),
+('02',3);
 
 DROP TABLE IF EXISTS REGISTRATION;
 CREATE TABLE REGISTRATION (
 	Student			    integer not null,
 	Section				varchar(3) not null,
-	CNumber				integer not null,
-	CName				varchar(4) not null,
+	CourseID			integer,
 	Grade				varchar(1) not null,
-	primary key (Student,Section,CNumber,CName),
+	primary key (Student,Section,CourseID),
 	foreign key (Student) references STUDENT(StudentID),
-	foreign key (Section) references OFFERING(Section),
-	foreign key (CNumber,CName) references COURSE(CNumber,CName)
+	foreign key (Section, CourseID) references OFFERING(Section, CourseID)
 );
 
--- INSERT INTO REGISTRATION (Student, Section, CNumber, CName, Grade)
--- VALUES
--- ;
+INSERT INTO REGISTRATION (Student, Section, CourseID, Grade)
+VALUES
+(1, '01', 1, 'A'),
+(2, '01', 1, 'B'),
+(3, '02', 1, 'C'),
+(4, '02', 1, 'D');
+
 
 DROP TABLE IF EXISTS PREREQUISITE;
 CREATE TABLE PREREQUISITE (
-	CNumber				integer not null,
-	CName				varchar(4) not null,
-	PNumber				integer not null,
-	PName				varchar(4) not null,
-	primary key (CNumber,CName,PNumber,PName),
-	foreign key (CNumber,CName) references COURSE(CNumber,CName),
-	foreign key (PNumber, PName) references COURSE(CNumber,CName)
+	CID	 	integer not null,
+    PID 	integer not null,
+	primary key (CID, PID),
+	foreign key (CID) references COURSE(CourseID),
+	foreign key (PID) references COURSE(CourseID)
     );
 
--- INSERT INTO PREREQUISITE (CNumber,CName,PNumber,PName)
--- VALUES
+INSERT INTO PREREQUISITE (CID, PID)
+VALUES
+(1, 2), 
+(2, 3), 
+(3, 4);
