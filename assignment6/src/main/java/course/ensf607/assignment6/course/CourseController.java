@@ -25,6 +25,12 @@ public class CourseController {
     return courseService.getAllCourses();
   }
 
+  @GetMapping("/sorted")
+  public List<Course> getAllCoursesSorted() {
+    return courseService.getAllCoursesSorted();
+  }
+
+
   @GetMapping("/{courseName}")
   public Course getCourse(@PathVariable String courseName) {
     Course course = courseService.getCourseByName(courseName);
@@ -34,6 +40,16 @@ public class CourseController {
   @PostMapping
   public void registerNewCourse(@RequestBody Course course) {
     courseService.addNewCourse(course);
+  }
+
+  @DeleteMapping("/{courseName}")
+  public void deleteCourse(@PathVariable String courseName) {
+    courseService.deleteCourseByName(courseName);
+  }
+
+  @PutMapping("/{oldCourseName}/{newCourseName}")
+  public void updateCourseName(@PathVariable String oldCourseName, @PathVariable String newCourseName) {
+    courseService.updateCourseName(oldCourseName, newCourseName);
   }
 
   // @PutMapping("{courseId}/students/{studentId}")

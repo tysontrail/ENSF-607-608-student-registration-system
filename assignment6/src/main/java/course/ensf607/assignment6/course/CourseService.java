@@ -19,11 +19,15 @@ public class CourseService {
     return courseRepository.findAll();
   }
 
+  public List<Course> getAllCoursesSorted() {
+    return courseRepository.findAllByOrderByNameAsc();
+  }
+
   public void addNewCourse(Course course) {
     Optional<Course> courseByName = courseRepository.findByName(course.getName());
     if (courseByName.isPresent()) {
       System.out.println(courseByName);
-      throw new IllegalStateException("Course already exist!");
+      throw new IllegalStateException("Course already exists!");
     }
     courseRepository.save(course);
   }
@@ -46,5 +50,22 @@ public class CourseService {
       throw new IllegalStateException("Course doesn't exist!");
     }
     return courseByName.get();
+  }
+
+  public void deleteCourseByName(String courseName) {
+    Optional<Course> courseByName = courseRepository.findByName(courseName);
+    if (!courseByName.isPresent()) {
+      throw new IllegalStateException("Course doesn't exist!");
+    }
+    courseRepository.delete(courseByName.get());
+  }
+
+  public void updateCourseName(String oldCourseName, String newCourseName) {
+    Optional<Course> oldCourseByName = courseRepository.findByName(oldCourseName);
+    if (!oldCourseByName.isPresent()) {
+      throw new IllegalStateException("Course doesn't exist!");
+    }
+    oldCourseByName.get().setName(newCourseName);
+    courseRepository.save(oldCourseByName.get());
   }
 }
